@@ -9,10 +9,11 @@ env:
   # please change to your own config.
   # this actions generate only this year
   # If you fork this please change the type to yours below
-  TYPE: "ns, issue, strava, github, pass" # support strava/gpx/ns/cichang/shanbay/duolingo/issue/leetcode/twitter/github/gitlab/kindle/bilibili/wakatime/dota2/forest, Please change the 'pass' it to your own separated by commas
-  ME: Yihong0618
-  GITHUB_NAME: yihong0618
-  GITHUB_EMAIL: zouzou0208@gmail.com
+  TYPE: "notion" # support strava/gpx/ns/cichang/shanbay/duolingo/issue/leetcode/twitter/github/gitlab/kindle/bilibili/wakatime/dota2/forest, Please change the 'pass' it to your own separated by commas
+  ME: Julian
+  PROP_NAME: "Sleep Time"
+  GITHUB_NAME: "Ruter Lyu"
+  GITHUB_EMAIL: "github@ruterly.com"
 
 jobs:
   sync:
@@ -117,6 +118,11 @@ jobs:
         if: contains(env.TYPE, 'dota2')
         run: |
           python3 -m github_poster dota2 --dota2_id "${{ secrets.DOTA2_ID }}" --me ${{ env.ME }}
+      
+      - name: Run sync notion script
+        if: contains(env.TYPE, 'notion')
+        run: |
+          python3 -m github_poster notion --notion_token "${{ secrets.NOTION_TOKEN }}" --database_id "${{ secrets.NOTION_DATABASE_ID }}" --prop_name ${{ env.PROP_NAME }} --me ${{ env.ME }} --without-type-name
 
       # change the types to yours
       - name: Run sync multiple script
@@ -126,7 +132,7 @@ jobs:
 
       - name: Mv svg files to examples
         # only for me to show
-        if: github.repository_owner == 'yihong0618'
+        if: github.repository_owner == 'ruter'
         run: mv OUT_FOLDER/*.svg examples/ && mv OUT_FOLDER/*.stl examples/
 
       - name: Push new svg posters
