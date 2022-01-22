@@ -139,8 +139,10 @@ jobs:
         uses: github-actions-x/commit@v2.6
         with:
           github-token: ${{ secrets.G_T }}
+          push-branch: 'main'
           commit-message: "Make new poster"
           files: examples OUT_FOLDER
-          rebase: "true"
+          rebase: 'true'
+          force-add: 'true'
           name: ${{ env.GITHUB_NAME }}
           email: ${{ env.GITHUB_EMAIL }}
