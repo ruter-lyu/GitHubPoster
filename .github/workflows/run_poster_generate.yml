@@ -122,7 +122,7 @@ jobs:
       - name: Run sync notion script
         if: contains(env.TYPE, 'notion')
         run: |
-          python3 -m github_poster notion --notion_token "${{ secrets.NOTION_TOKEN }}" --database_id "${{ secrets.NOTION_DATABASE_ID }}" --prop_name ${{ env.PROP_NAME }} --me ${{ env.ME }} --without-type-name
+          python3 -m github_poster notion --notion_token "${{ secrets.NOTION_TOKEN }}" --database_id "${{ secrets.NOTION_DATABASE_ID }}" --prop_name "${{ env.PROP_NAME }}" --me ${{ env.ME }} --without-type-name
 
       # change the types to yours
       - name: Run sync multiple script
